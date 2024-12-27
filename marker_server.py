@@ -68,6 +68,7 @@ def handler(event):
             images_base64[image_name] = encoded_image
             print(f"image 3 {image_name}")
 
+        print(f"Sending images {len(images_base64)}")
         return {
             "markdown": markdown_text,
             "metadata": metadata,
