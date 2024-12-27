@@ -1,7 +1,7 @@
 # -------------------------------------
 # Dockerfile to run marker on RunPod
 # -------------------------------------
-FROM python:3.10-slim-bullseye
+FROM python:3.11-slim-bullseye
 
 # (Optional) Set environment variables for controlling Torch device
 ENV TORCH_DEVICE="cuda"
@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     libgl1 \
     gcc \
+    libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip
