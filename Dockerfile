@@ -17,6 +17,5 @@ RUN pip install marker-pdf fastapi uvicorn python-multipart runpod
 COPY marker_server.py /app/marker_server.py
 
 WORKDIR /app
-EXPOSE 8000
 
-CMD ["uvicorn", "marker_server:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "marker_server"]
