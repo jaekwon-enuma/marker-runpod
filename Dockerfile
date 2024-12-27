@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip
-RUN pip install marker-pdf fastapi uvicorn python-multipart
+RUN pip install marker-pdf fastapi uvicorn python-multipart runpod
 
 COPY marker_server.py /app/marker_server.py
 
