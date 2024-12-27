@@ -1,6 +1,7 @@
 import io
 import os
 import base64
+import zipfile
 import runpod
 import tempfile
 
@@ -36,6 +37,11 @@ def handler(event):
         print("handler 04", flush=True)
         # Decode the base64 content
         pdf_bytes = base64.b64decode(pdf_base64)
+
+        with io.BytesIO(zip_bytes) as zbuf:
+            with zipfile.ZipFile(zbuf, "r") as zipf:
+                # Assuming the PDF inside the zip is stored as 'document.pdf'
+                pdf_bytes = zipf.read("document.pdf")
 
         # Write the decoded bytes to a temporary file
         with open(temp_filepath, "wb") as f:
