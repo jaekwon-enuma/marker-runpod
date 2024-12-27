@@ -33,7 +33,11 @@ def handler(event):
 
     try:
         print("handler 04", flush=True)
-        with open(temp_filepath, "wb") as f:  # Use the file path, not the file descriptor
+        # Decode the base64 content
+        pdf_bytes = base64.b64decode(pdf_base64)
+
+        # Write the decoded bytes to a temporary file
+        with open(temp_filepath, "wb") as f:
             f.write(pdf_bytes)
 
         print("handler 05", flush=True)
@@ -55,3 +59,5 @@ def handler(event):
 
 if __name__ == "__main__":
     runpod.serverless.start({"handler": handler})
+
+
