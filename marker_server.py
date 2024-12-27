@@ -24,7 +24,7 @@ def handler(event):
 
     print("handler 01", flush=True)
     input_data = event.get("input", {})
-    print("handler 02", flush=True)
+    print(f"handler 02 {len(input_data)}", flush=True)
 
     pdf_base64 = input_data.get("pdf_base64")
     if not pdf_base64:
@@ -36,7 +36,7 @@ def handler(event):
     try:
         print("handler 04", flush=True)
         # Decode the base64 content
-        pdf_bytes = base64.b64decode(pdf_base64)
+        zip_bytes = base64.b64decode(pdf_base64)
 
         with io.BytesIO(zip_bytes) as zbuf:
             with zipfile.ZipFile(zbuf, "r") as zipf:
