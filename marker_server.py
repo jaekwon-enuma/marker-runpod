@@ -43,13 +43,28 @@ def handler(event):
         print("handler 05", flush=True)
         rendered = converter(temp_filepath)
         print("handler 06", flush=True)
-        text, metadata, images = text_from_rendered(rendered)
+        markdown_text, metadata, images = text_from_rendered(rendered)
         print(f"handler 07 len:{len(text)}", flush=True)
 
+        images_base64 = {}
+        for image_name, image_obj in images.items():
+            print(f"image 0 {image_name}")
+            # Save image to in-memory bytes buffer
+            buf = io.BytesIO()
+            image_obj.save(buf, format="JPEG")
+            buf.seek(0)
+
+            print(f"image 1 {image_name}")
+            # Base64-encode the image data
+            encoded_image = base64.b64encode(buf.read()).decode("utf-8")
+            print(f"image 2 {image_name}")
+            images_base64[image_name] = encoded_image
+            print(f"image 3 {image_name}")
+
         return {
-            "markdown": text,
-            "images": images,
-            "metadata": metadata
+            "markdown": markdown_text,
+            "metadata": metadata,
+            "images": images_base64  # Each value is a Base64-encoded string
         }
 
     finally:
