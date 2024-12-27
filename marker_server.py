@@ -44,7 +44,7 @@ def handler(event):
         rendered = converter(temp_filepath)
         print("handler 06", flush=True)
         markdown_text, metadata, images = text_from_rendered(rendered)
-        print(f"handler 07 len:{len(text)}", flush=True)
+        print(f"handler 07 len:{len(markdown_text)}", flush=True)
 
         images_base64 = {}
         for image_name, image_obj in images.items():
